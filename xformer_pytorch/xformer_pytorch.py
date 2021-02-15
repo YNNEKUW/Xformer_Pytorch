@@ -36,9 +36,9 @@ class Xformer(nn.Module):
 
     def reset_parameters(self):
         nn.init.xavier_uniform_(self.k_v_proj.weight)
-        nn.init_xavier_uniform_(self.q_proj.weight)
+        nn.init.xavier_uniform_(self.q_proj.weight)
         
-        nn.init_xavier_uniform_(self.out_proj.weight)
+        nn.init.xavier_uniform_(self.out_proj.weight)
 
     def forward(self, input_tensor):
         input_length, batch_size, hidden_dim = input_tensor.shape
@@ -51,10 +51,10 @@ class Xformer(nn.Module):
         
         q = q * self.scaling
         
-        q = rearrange(q, 'b l d -> (b h) l w', h=self.num_heads, w=self.head_dim)
-        k = rearrange(k, 'b d l -> (b h) w l', h=self.num_heads, w=self.head_dim)
-        v = rearrange(v, 'b d l -> (b h) w l', h=self.num_heads, w=self.head_dim)
-        v = rearrange(v, 'b w l -> b l w')
+        q = rearrange(q, 'b l (h d) -> (b h) l d', h=self.num_heads)
+        k = rearrange(k, 'b (d h) l -> (b h) d l', h=self.num_heads)
+        v = rearrange(v, 'b (d h) l -> (b h) d l', h=self.num_heads)
+        v = rearrange(v, 'b d l -> b l d')
 
 
         attn_weights = q @ k
@@ -62,11 +62,11 @@ class Xformer(nn.Module):
         attn_weights = attn_weights_float.type_as(attn_weights)
         attn_probs = F.dropout(
             attn_weights,
-            p=self.dropout
+            p=self.dropout,
             training=self.training
         )
         X = attn_probs @ v
-        X = rearrange(X, 'b l w -> x l d', x=batch_size, d=hidden_dim)
+        X = rearrange(X, '(b h) l d -> b l (d h)', h=self.num_heads)
         X = self.out_proj(X)
         X = rearrange(X, 'b l d -> l b d')
 
