@@ -12,11 +12,11 @@ We keep the original attention operation while modifying the projection matrices
 The performance of the baseline Transformer model on the IWSLT 14 DE-EN translation task is and our Xformer's performance is 32.09 bleu score while achieving substantial acceleration.
 ### Inference time comparison
 The experiment is to measure the total inference time of the baseline and the proposed attention modules on an input tensor of shape (sequence length, batchsize, hidden dimension), while batchsize and hidden dimension are set 40 and 512 respectively, we vary the sequence length as {128, 256, 512, 1024, 2048} ,and $\alpha$ and $\beta$ as {2, 4, 8, 16}. The numbers in the table are inference time in second.
-| Sequence length\$\alpha$$\beta$        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| 128        | 0      | $1600 |
-| 256        | 0      |   $12 |
-| 512      | 0      |    $1 |
+| Sequence length\$\alpha$$\beta$        | 2           | 4  |8  |16  |
+| ------------- |:-------------:| :-----:|:-----:|:-----:|
+| 128        | 0      | $1600 |$1600 |$1600 |
+| 256        | 0      |   $12 | $12 | $12 |
+| 512      | 0      |    $1 | $12 | $12 |
 ## Example
 
 ## FAQ
