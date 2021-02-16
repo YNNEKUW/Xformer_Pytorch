@@ -20,9 +20,15 @@ The experiment is to measure the total inference time of the baseline and the pr
 | 1024       | 34.3950| 21.6591| 15.6320| 12.8416| 58.1030|
 | 2048       |105.3789| 60.5599| 40.2494| 30.0931|200.8014|
 ## Usage
+For using the Xformer attention module, first do
 ```
 git clone https://github.com/YNNEKUW/Xformer_Pytorch.git
-mv Xformer_Pytorch/
+mv Xformer_Pytorch/xformer_pytorch .
 ```
+and then
+```python
+from xformer_pytorch import Xformer
+```
+### Example
 
 ## FAQ
