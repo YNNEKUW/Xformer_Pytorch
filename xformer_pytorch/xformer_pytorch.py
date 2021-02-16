@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from einops import repeat, rearrange
-from quant_noise import quant_noise
+from .quant_noise import quant_noise
 
 
 class Xformer(nn.Module):
