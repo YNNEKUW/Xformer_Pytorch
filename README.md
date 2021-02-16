@@ -2,7 +2,7 @@
 
 ## Table of Contents
 - [Introduction](#Introduction)
-- [Example](#Example)
+- [Example](#Usage)
 - [FAQ](#FAQ)
 
 ## Introduction
