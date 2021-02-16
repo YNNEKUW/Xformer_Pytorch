@@ -19,6 +19,9 @@ The experiment is to measure the total inference time of the baseline and the pr
 | 512        | 12.7100| 8.7503 | 6.8507 | 6.0144 | 21.0929|
 | 1024       | 34.3950| 21.6591| 15.6320| 12.8416| 58.1030|
 | 2048       |105.3789| 60.5599| 40.2494| 30.0931|200.8014|
-## Example
+## Usage
+```
+git clone 
+```
 
 ## FAQ
