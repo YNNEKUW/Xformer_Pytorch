@@ -23,6 +23,7 @@ The experiment is to measure the total inference time of the baseline and the pr
 For using the Xformer attention module, first do
 ```
 git clone https://github.com/YNNEKUW/Xformer_Pytorch.git
+pip install -r Xformer_Pytorch/requirement.txt
 mv Xformer_Pytorch/xformer_pytorch .
 ```
 and then
