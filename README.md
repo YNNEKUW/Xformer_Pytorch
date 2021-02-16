@@ -21,7 +21,8 @@ The experiment is to measure the total inference time of the baseline and the pr
 | 2048       |105.3789| 60.5599| 40.2494| 30.0931|200.8014|
 ## Usage
 ```
-git clone 
+git clone https://github.com/YNNEKUW/Xformer_Pytorch.git
+mv Xformer_Pytorch/
 ```
 
 ## FAQ
