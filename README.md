@@ -30,5 +30,23 @@ and then
 from xformer_pytorch import Xformer
 ```
 ### Example
+```python
+import torch
+from fairseq.modules.multihead_attention import MultiheadAttention
+from xformer_pytorch import Xformer
+
+
+hidden_dim = 512
+n_heads = 4
+batch_size = 40
+length = 1024
+
+baseline_attn = MultiheadAttention(hidden_dim, n_heads, self_attention=True).cuda()
+test_input = torch.ones((length, batch_size, hidden_dim)).cuda()
+dummy_out = baseline_attn(test_input, test_input, test_input)
+
+xformer_attn = MultiheadAttention(hidden_dim, n_heads, self_attention=True).cuda()
+dummy_out = xformer_attn(test_input)
+```
 
 ## FAQ
