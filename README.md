@@ -50,15 +50,20 @@ hidden_dim = 512
 n_heads = 4
 batch_size = 40
 length = 1024
-
-baseline_attn = MultiheadAttention(hidden_dim, n_heads, self_attention=True).cuda()
-test_input = torch.ones((length, batch_size, hidden_dim)).cuda()
-dummy_out = baseline_attn(test_input, test_input, test_input)
-
+max_seq_len = 4000
 alpha = 2
 beta = 2
-xformer_attn = Xformer(hidden_dim, n_heads, max_seq_len=length, alpha=alpha, beta=beta).cuda()
-output = xformer_attn(test_input)
+
+input_tensor = torch.ones((length, batch_size, hidden_dim)).cuda()
+
+# Xformer attention module
+xformer_attn = Xformer(hidden_dim, n_heads, max_seq_len=max_seq_len, alpha=alpha, beta=beta).cuda()
+xformer_out = xformer_attn(input_tensor)
+
+
+# Baseline attention module
+baseline_attn = MultiheadAttention(hidden_dim, n_heads, self_attention=True).cuda()
+baseline_out = baseline_attn(input_tensor, input_tensor, input_tensor)
 ```
 
 ## FAQ
