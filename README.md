@@ -23,11 +23,11 @@ The experiment is to measure the total inference time of the baseline and the pr
 Speedup with respect to the baseline attention module:
 | Sequence length \\ $\alpha$$\beta$ | 2 | 4  |8  |16  |
 | ------------- |:-------------:| :-----:|:-----:|:-----:|
-| 128        | 2.56 | 1.96 | 1.67 | 1.54 |
-| 256        | 5.31 | 3.97 | 3.30 | 2.98 |
-| 512        | 12.71| 8.75 | 6.85 | 6.01 |
-| 1024       | 34.40| 21.66| 15.63| 12.84|
-| 2048       |105.38| 60.56| 40.25| 30.09|
+| 128        | 34.52 % | 49.87 % | 1.67 % | 1.54 % |
+| 256        | 5.31 % | 3.97 % | 3.30 % | 2.98 % |
+| 512        | 12.71 %| 8.75 % | 6.85 % | 6.01 % |
+| 1024       | 34.40 %| 21.66 %| 15.63 %| 12.84 %|
+| 2048       |105.38 %| 60.56 %| 40.25 %| 30.09 %|
 ## Usage
 For using the Xformer attention module, first do
 ```
@@ -50,20 +50,15 @@ hidden_dim = 512
 n_heads = 4
 batch_size = 40
 length = 1024
-max_seq_len = 4000
+
+baseline_attn = MultiheadAttention(hidden_dim, n_heads, self_attention=True).cuda()
+test_input = torch.ones((length, batch_size, hidden_dim)).cuda()
+dummy_out = baseline_attn(test_input, test_input, test_input)
+
 alpha = 2
 beta = 2
-
-input_tensor = torch.ones((length, batch_size, hidden_dim)).cuda()
-
-# Xformer attention module
-xformer_attn = Xformer(hidden_dim, n_heads, max_seq_len=max_seq_len, alpha=alpha, beta=beta).cuda()
-xformer_out = xformer_attn(input_tensor)
-
-
-# Baseline attention module
-baseline_attn = MultiheadAttention(hidden_dim, n_heads, self_attention=True).cuda()
-baseline_out = baseline_attn(input_tensor, input_tensor, input_tensor)
+xformer_attn = Xformer(hidden_dim, n_heads, max_seq_len=length, alpha=alpha, beta=beta).cuda()
+output = xformer_attn(test_input)
 ```
 
 ## FAQ
