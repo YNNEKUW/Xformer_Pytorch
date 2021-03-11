@@ -59,8 +59,7 @@ baseline_attn = MultiheadAttention(hidden_dim, n_heads, self_attention=True).cud
 test_input = torch.ones((length, batch_size, hidden_dim)).cuda()
 dummy_out = baseline_attn(test_input, test_input, test_input)
 
-# To use less hyperparameters, 
-# we let scalar = alpha = beta here.
+# To use less hyperparameters, we let scalar = alpha = beta here.
 scalar = 2
 xformer_attn = Xformer(hidden_dim, n_heads, max_seq_len=length, scalar=scalar).cuda()
 output = xformer_attn(test_input)
